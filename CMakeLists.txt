@@ -1,0 +1,25 @@
+cmake_minimum_required(VERSION 3.8)
+project(ros2_ci_test)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+# find dependencies
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+
+add_executable(hello_world_node
+  src/hello_world_node.cpp
+)
+
+ament_target_dependencies(hello_world_node
+  rclcpp
+)
+
+install(TARGETS
+  hello_world_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+ament_package()
